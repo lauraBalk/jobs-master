@@ -1,4 +1,4 @@
 class Attack < ApplicationRecord
-  belongs_to :combat
-  belongs_to :hero
+  belongs_to :fight_hero
+
 end

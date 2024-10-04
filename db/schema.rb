@@ -40,8 +40,20 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_04_085951) do
   end
 
   create_table "attacks", force: :cascade do |t|
+    t.integer "damage"
+    t.integer "fight_hero_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["fight_hero_id"], name: "index_attacks_on_fight_hero_id"
+  end
+
+  create_table "fight_heros", force: :cascade do |t|
+    t.integer "hero_id"
+    t.integer "fight_id"
+    t.integer "weapon_id"
+    t.index ["fight_id"], name: "index_fight_heros_on_fight_id"
+    t.index ["hero_id"], name: "index_fight_heros_on_hero_id"
+    t.index ["weapon_id"], name: "index_fight_heros_on_weapon_id"
   end
 
   create_table "fights", force: :cascade do |t|
@@ -69,5 +81,9 @@ ActiveRecord::Schema[7.0].define(version: 2024_10_04_085951) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "attacks", "fight_heros"
+  add_foreign_key "fight_heros", "fights"
+  add_foreign_key "fight_heros", "heros"
+  add_foreign_key "fight_heros", "weapons"
   add_foreign_key "fights", "heros", column: "winner_id"
 end

@@ -1,2 +1,26 @@
-%h1
-  Hello World!
+%div{class: 'container mx-auto' } 
+  %h1{class: 'text-3xl font-bold underline'}
+    Liste des heros
+  = link_to 'Nouveau hero', new_hero_path
+  = link_to 'Combattre', new_fight_path
+  %div{class:'container mx-auto flex items-center flex-wrap pt-4 pb-12'}
+    - @heros.each do |hero|
+      %div{class: 'w-full md:w-1/3 xl:w-1/4 p-6 flex flex-col'}
+        %div{class:'pt-3 flex items-center justify-between'}
+          %p 
+            Nom 
+            = hero.name
+        %div{class:'pt-3 flex items-center justify-between'}
+          %p
+            Points de vie
+            = hero.life_points 
+        %div{class:'pt-3 flex items-center justify-between'}
+          %p 
+            Point d'attaque
+            = hero.attack_points
+        %div{class:'pt-3 flex items-center justify-between'}
+          %a{ href: edit_hero_path(hero), title: "Editer", class: "flex items-center justify-center w-full px-8 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-2xl hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-cool-indigo-500" } editer
+        %div{class:'pt-3 flex items-center justify-between'}
+          = link_to 'Supprimer',  hero_path(hero), method: :delete, class: "flex items-center justify-center w-full px-8 py-3 text-base font-medium text-white bg-red-600 border border-transparent rounded-2xl hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-cool-indigo-500"
+
+
